@@ -92,6 +92,10 @@ void btBulletDataExtractor::convertAllObjects(bParse::btBulletFile* bulletFile2)
 
 void* btBulletDataExtractor::convertCollisionShape(  btCollisionShapeData* shapeData  )
 {
+	btCollisionShape** shapePtr =  m_shapeMap.find(shapeData);
+	if (shapePtr)
+		return *shapePtr;
+	
 	void* shape = 0;
 
 	switch (shapeData->m_shapeType)
@@ -319,6 +323,8 @@ void* btBulletDataExtractor::convertCollisionShape(  btCollisionShapeData* shape
 				printf("unsupported shape type (%d)\n",shapeData->m_shapeType);
 			}
 		}
+
+		m_shapeMap.insert(shapeData,shape);
 
 		return shape;
 	

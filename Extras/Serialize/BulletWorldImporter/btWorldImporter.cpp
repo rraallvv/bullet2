@@ -147,6 +147,10 @@ void btWorldImporter::deleteAllData()
 
 btCollisionShape* btWorldImporter::convertCollisionShape(  btCollisionShapeData* shapeData  )
 {
+	btCollisionShape** shapePtr =  m_shapeMap.find(shapeData);
+	if (shapePtr)
+		return *shapePtr;
+
 	btCollisionShape* shape = 0;
 
 	switch (shapeData->m_shapeType)
@@ -497,6 +501,9 @@ btCollisionShape* btWorldImporter::convertCollisionShape(  btCollisionShapeData*
 #endif
 			}
 		}
+	
+		//		printf("shapeMap.insert(%x,%x)\n",shapeData,shape);
+		m_shapeMap.insert(shapeData,shape);
 
 		return shape;
 	

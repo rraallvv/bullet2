@@ -766,10 +766,6 @@ void btBulletXmlWorldImporter::auto_serialize_root_level_children(TiXmlNode* pPa
 	{
 		btCollisionShapeData* shapeData = m_collisionShapeData[i];
 		btCollisionShape* shape = convertCollisionShape(shapeData);
-		if (shape)
-		{
-			m_shapeMap.insert(shapeData,shape);
-		}
 		if (shape&& shapeData->m_name)
 		{
 			char* newname = duplicateName(shapeData->m_name);

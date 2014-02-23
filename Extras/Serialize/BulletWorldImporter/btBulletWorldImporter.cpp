@@ -126,12 +126,6 @@ bool	btBulletWorldImporter::convertAllObjects(  bParse::btBulletFile* bulletFile
 	{
 		btCollisionShapeData* shapeData = (btCollisionShapeData*)bulletFile2->m_collisionShapes[i];
 		btCollisionShape* shape = convertCollisionShape(shapeData);
-		if (shape)
-		{
-	//		printf("shapeMap.insert(%x,%x)\n",shapeData,shape);
-			m_shapeMap.insert(shapeData,shape);
-		}
-
 		if (shape&& shapeData->m_name)
 		{
 			char* newname = duplicateName(shapeData->m_name);
